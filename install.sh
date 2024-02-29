@@ -57,20 +57,23 @@ install_dotfiles() {
         echo -e "It's used to backup and restore your old config.\n" >&2
     fi
 
-    # Install config.
+    # Install $HOME/. configs.
     for dots_home in "${dotfiles_home_dir[@]}"
     do
         env rm -rf "$HOME/${dots_home}"
         env ln -fs "$dotfiles_repo_dir/${dots_home}" "$HOME/"
     done
 
-    # Install config to ~/.config.
+    # Install $HOME/.config configs.
     mkdir -p "$HOME/.config"
     for dots_xdg_conf in "${dotfiles_xdg_config_dir[@]}"
     do
         env rm -rf "$HOME/.config/${dots_xdg_conf[*]//./}"
         env ln -fs "$dotfiles_repo_dir/${dots_xdg_conf}" "$HOME/.config/${dots_xdg_conf[*]//./}"
     done
+
+    # Install $HOME/.oh-my-zsh/custom themes and plugins
+    env cp -rf "$dotfiles_repo_dir/.oh-my-zsh/*" "$HOME/.oh-my-zsh/"
 
     echo -e "${blue}New dotfiles is installed!\n${white}" >&2
     echo "There may be some errors when Terminal is restarted." >&2
