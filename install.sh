@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Moded Dotfiles specific to Arch Linux installation
 
 blue='\e[1;34m'
 red='\e[1;31m'
