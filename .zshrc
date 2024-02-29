@@ -34,17 +34,29 @@ source ~/.zsh/setopt.zsh
 
 # Aliases.
 source ~/.aliases
-source ~/.aliases_private
+if [ -e "~/.aliases_private" ];
+    then
+      source ~/.aliases_private;
+fi
 
 # Functions.
 source ~/.functions
-source ~/.functions_private
+if [ -e "~/.functions_private" ];
+    then
+      source ~/.functions_private;
+fi
 
 # Private config.
-source ~/.privaterc
+if [ -e "~/.privaterc" ];
+    then
+      source ~/.privaterc;
+fi
 
 # Tracks your most used directories, based on frecency with z.
-source ~/.zsh/plugins/z/z.sh
+if [ -e "~/.zsh/plugins/z/z.sh" ];
+    then
+      source ~/.zsh/plugins/z/z.sh;
+fi
 
 # dircolors.
 if [ -x "$(command -v dircolors)" ]; then
@@ -60,3 +72,10 @@ fi
 if [ -f ~/.local/bin/base16-oxide ]; then
     source ~/.local/bin/base16-oxide
 fi
+
+# Start tmux on load
+if [ -z "$TMUX" ]
+then
+    tmux attach -t default && exit || tmux new -s default && exit
+fi
+

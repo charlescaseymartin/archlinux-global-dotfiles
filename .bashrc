@@ -44,3 +44,7 @@ fi
 if [ -f ~/.local/bin/base16-oxide ]; then
     source ~/.local/bin/base16-oxide
 fi
+
+# Start tmux on load
+#[[ $TERM != "screen" ]] && exec tmux
+#[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && clear && exit;}
