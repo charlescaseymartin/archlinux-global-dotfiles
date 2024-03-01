@@ -73,7 +73,7 @@ install_dotfiles() {
     done
 
     # Install $HOME/.oh-my-zsh/custom themes and plugins
-    env cp -rf "$dotfiles_repo_dir/.oh-my-zsh/*" "$HOME/.oh-my-zsh/"
+    env cp -rf "$dotfiles_repo_dir/.oh-my-zsh/custom" "$HOME/.oh-my-zsh/"
 
     echo -e "${blue}New dotfiles is installed!\n${white}" >&2
     echo "There may be some errors when Terminal is restarted." >&2
