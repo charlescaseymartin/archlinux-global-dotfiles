@@ -4,9 +4,8 @@
 blue='\e[1;34m'
 red='\e[1;31m'
 white='\e[0;37m'
-root_dir="/root"
 dotfiles_repo_dir=$(pwd)
-backup_dir="$root_dir/.dotfiles.orig"
+backup_dir="$HOME/.dotfiles.orig"
 dotfiles_home_dir=(.zsh .aliases .bash_profile .bashrc .dircolors .editorconfig .exports
                    .functions .gemrc .ripgreprc .wgetrc .Xresources .zshrc)
 dotfiles_xdg_config_dir=(.alacritty .dunst .htop .i3 .i3status .i3blocks .picom .rofi .tmux)
@@ -35,13 +34,13 @@ install_dotfiles() {
         # Backup to ~/.dotfiles.orig
         for dots_home in "${dotfiles_home_dir[@]}"
         do
-            env cp -rf "$root_dir/${dots_home}" "$backup_dir" &> /dev/null
+            env cp -rf "$HOME/${dots_home}" "$backup_dir" &> /dev/null
         done
 
         # Backup some folder in ~/.config to ~/.dotfiles.orig/.config
         for dots_xdg_conf in "${dotfiles_xdg_config_dir[@]//./}"
         do
-            env cp -rf "$root_dir/.config/${dots_xdg_conf}" "$backup_dir/.config" &> /dev/null
+            env cp -rf "$HOME/.config/${dots_xdg_conf}" "$backup_dir/.config" &> /dev/null
         done
 
         # Backup again with Git.
@@ -58,23 +57,23 @@ install_dotfiles() {
         echo -e "It's used to backup and restore your old config.\n" >&2
     fi
 
-    # Install $root_dir/. configs.
+    # Install $HOME/. configs.
     for dots_home in "${dotfiles_home_dir[@]}"
     do
-        env rm -rf "$root_dir/${dots_home}"
-        env ln -fs "$dotfiles_repo_dir/${dots_home}" "$root_dir/"
+        env rm -rf "$HOME/${dots_home}"
+        env ln -fs "$dotfiles_repo_dir/${dots_home}" "$HOME/"
     done
 
-    # Install $root_dir/.config configs.
-    mkdir -p "$root_dir/.config"
+    # Install $HOME/.config configs.
+    mkdir -p "$HOME/.config"
     for dots_xdg_conf in "${dotfiles_xdg_config_dir[@]}"
     do
-        env rm -rf "$root_dir/.config/${dots_xdg_conf[*]//./}"
-        env ln -fs "$dotfiles_repo_dir/${dots_xdg_conf}" "$root_dir/.config/${dots_xdg_conf[*]//./}"
+        env rm -rf "$HOME/.config/${dots_xdg_conf[*]//./}"
+        env ln -fs "$dotfiles_repo_dir/${dots_xdg_conf}" "$HOME/.config/${dots_xdg_conf[*]//./}"
     done
 
-    # Install $root_dir/.oh-my-zsh/custom themes and plugins
-    env cp -rf "$dotfiles_repo_dir/.oh-my-zsh/custom" "$root_dir/.oh-my-zsh/"
+    # Install $HOME/.oh-my-zsh/custom themes and plugins
+    env cp -rf "$dotfiles_repo_dir/.oh-my-zsh/custom" "$HOME/.oh-my-zsh/"
 
     echo -e "${blue}New dotfiles is installed!\n${white}" >&2
     echo "There may be some errors when Terminal is restarted." >&2
@@ -87,15 +86,15 @@ uninstall_dotfiles() {
     if [ -f "$backup_dir/check-backup.txt" ]; then
         for dots_home in "${dotfiles_home_dir[@]}"
         do
-            env rm -rf "$root_dir/${dots_home}"
-            env cp -rf "$backup_dir/${dots_home}" "$root_dir/" &> /dev/null
+            env rm -rf "$HOME/${dots_home}"
+            env cp -rf "$backup_dir/${dots_home}" "$HOME/" &> /dev/null
             env rm -rf "$backup_dir/${dots_home}"
         done
 
         for dots_xdg_conf in "${dotfiles_xdg_config_dir[@]//./}"
         do
-            env rm -rf "$root_dir/.config/${dots_xdg_conf}"
-            env cp -rf "$backup_dir/.config/${dots_xdg_conf}" "$root_dir/.config" &> /dev/null
+            env rm -rf "$HOME/.config/${dots_xdg_conf}"
+            env cp -rf "$backup_dir/.config/${dots_xdg_conf}" "$HOME/.config" &> /dev/null
             env rm -rf "$backup_dir/.config/${dots_xdg_conf}"
         done
 
