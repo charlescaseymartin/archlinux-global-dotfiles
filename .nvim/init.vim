@@ -1,6 +1,7 @@
 " General.
 set nocompatible
 set number
+set relativenumber
 set autoindent " Copy indent from last line when starting new line
 set autoread " Set to auto read when a file is changed from the outside
 set backspace=indent,eol,start
