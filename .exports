@@ -22,6 +22,8 @@ if [ "$(ps -p $$ -ocomm=)" = "zsh" ]; then
     export PROMPT_EOL_MARK=""
     # History settings.
     export HISTORY_IGNORE="([bf]g|c|clear|e|exit|h|history|incognito|l|l[adfls]|pwd|z)"
+    # Compdump location
+    export ZSH_COMPDUMP="$ZSH/cache/.zcompdump-$HOST"
 fi
 
 # Bash.
@@ -49,9 +51,6 @@ export NNN_BMS="d:~/Downloads;D:~/Documents;t:~/Temporary" # Bookmarks
 export NNN_FCOLORS="03040601000205f7d204d9f7" # File colors
 export NNN_PLUG="D:-!mediainfo \$nnn" # Plugins
 export NNN_TRASH=1 # Trash instead of delete the files
-
-# ripgrep.
-export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # Less.
 export LESS="--RAW-CONTROL-CHARS"
