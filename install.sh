@@ -61,7 +61,7 @@ install_dotfiles() {
     for dots_home in "${dotfiles_home_dir[@]}"
     do
         env rm -rf "$HOME/${dots_home}"
-        env ln -fs "$dotfiles_repo_dir/${dots_home}" "$HOME/"
+        env cp -rf "$dotfiles_repo_dir/${dots_home}" "$HOME/"
     done
 
     # Install $HOME/.config configs.
@@ -69,7 +69,7 @@ install_dotfiles() {
     for dots_xdg_conf in "${dotfiles_xdg_config_dir[@]}"
     do
         env rm -rf "$HOME/.config/${dots_xdg_conf[*]//./}"
-        env ln -fs "$dotfiles_repo_dir/${dots_xdg_conf}" "$HOME/.config/${dots_xdg_conf[*]//./}"
+        env cp -rf "$dotfiles_repo_dir/${dots_xdg_conf}" "$HOME/.config/${dots_xdg_conf[*]//./}"
     done
 
     # Install $HOME/.oh-my-zsh/custom themes and plugins
