@@ -64,11 +64,11 @@ install_dotfiles() {
         env cp -rf "$dotfiles_repo_dir/${dots_home}" "$HOME/"
     done
 
-    # Install $XDG_CONFIG_HOME configs.
-    mkdir -p "$XDG_CONFIG_HOME"
+    # Install $HOME/.config configs.
+    mkdir -p "$HOME/.config"
     for dots_xdg_conf in "${dotfiles_xdg_config_dir[@]}"
     do
-        env rm -rf "$XDG_CONFIG_HOME${dots_xdg_conf[*]//./}"
+        env rm -rf "$HOME/.config/${dots_xdg_conf[*]//./}"
         env cp -rf "$dotfiles_repo_dir/${dots_xdg_conf}" "$HOME/.config/${dots_xdg_conf[*]//./}"
     done
 
@@ -93,8 +93,8 @@ uninstall_dotfiles() {
 
         for dots_xdg_conf in "${dotfiles_xdg_config_dir[@]//./}"
         do
-            env rm -rf "$XDG_CONFIG_HOME${dots_xdg_conf}"
-            env cp -rf "$backup_dir/.config/${dots_xdg_conf}" "$XDG_CONFIG_HOME" &> /dev/null
+            env rm -rf "$HOME/.config/${dots_xdg_conf}"
+            env cp -rf "$backup_dir/.config/${dots_xdg_conf}" "$HOME/.config" &> /dev/null
             env rm -rf "$backup_dir/.config/${dots_xdg_conf}"
         done
 
