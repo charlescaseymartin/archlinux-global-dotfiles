@@ -1,6 +1,6 @@
 /* Rofi config file */
 configuration {
-    font: "BigBlueTerm437 Nerd Font 12";
+    font: "BigBlueTerm437 Nerd Font 10";
     show-icons: true;
     display-window: "Window";
     display-drun: "Search";
