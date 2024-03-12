@@ -78,7 +78,6 @@ syntax enable
 set t_Co=256
 set encoding=utf-8
 set guifont=Hack
-colorscheme minimalist
 
 " Directories.
 set backupdir=~/.local/share/nvim/backup
