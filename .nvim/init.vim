@@ -22,8 +22,6 @@ set formatoptions+=n " Recognize numbered lists
 set formatoptions+=2 " Use indent from 2nd line of a paragraph
 set formatoptions+=l " Don't break lines that are already long
 set formatoptions+=1 " Break before 1-letter words
-set gdefault " By default add g flag to search/replace. Add g to toggle
-#set guicursor= " Disable cursor style changes in Neovim
 set hidden " When a buffer is brought to foreground, remember undo history and marks
 set history=500 " Increase history from 20 default to 1000
 set hlsearch " Highlight searches
@@ -72,19 +70,7 @@ set wildmode=list:longest " Complete only until point of ambiguity
 set winminheight=0 " Allow splits to be reduced to a single line
 set wrapscan " Searches wrap around end of file
 
-" Plugin.
-call plug#begin('~/.local/share/nvim/plugged')
-#Plug 'ctrlpvim/ctrlp.vim'
-#Plug 'dikiaap/minimalist'
-#Plug 'editorconfig/editorconfig-vim'
-#Plug 'junegunn/vim-plug'
-#Plug 'mattn/emmet-vim'
-#Plug 'preservim/nerdtree'
-#Plug 'sheerun/vim-polyglot'
-#Plug 'tpope/vim-fugitive'
-#Plug 'vim-airline/vim-airline'
-#Plug 'vim-syntastic/syntastic'
-call plug#end()
+lua require('init')
 
 " Colors, Fonts, and Syntax.
 filetype plugin indent on
@@ -100,30 +86,8 @@ set directory=~/.local/share/nvim/swap
 set undodir=~/.local/share/nvim/undo
 
 " Airline.
-let g:airline_theme='minimalist'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
-
-" NERDTree.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
-
-" Syntastic.
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_phpcs_disable = 1
-let g:syntastic_phpmd_disable = 1
-let g:syntastic_php_checkers = ['php']
-let g:syntastic_quiet_messages = { "type": "style" }
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_auto_jump = 2
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
